@@ -17,7 +17,7 @@ repos:
     rev: v2.2.3
     hooks:
       - id: flake8
-  - repo: git://github.com/skorokithakis/pre-commit-mypy
+  - repo: https://github.com/pre-commit/mirrors-mypy
     rev: v0.701
     hooks:
       - id: mypy
@@ -40,7 +40,7 @@ repos:
         language: system
         files: \.(c|cc|cxx|cpp|cu|h|hpp|hxx)$
         exclude: easydl/go/vendor
-  - repo: git://github.com/dnephin/pre-commit-golang
+  - repo: https://github.com/dnephin/pre-commit-golang.git
     rev: v0.3.3
     hooks:
       - id: go-fmt
