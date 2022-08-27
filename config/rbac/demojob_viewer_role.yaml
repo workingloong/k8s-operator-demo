@@ -1,0 +1,20 @@
+# permissions for end users to view demojobs.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: demojob-viewer-role
+rules:
+- apiGroups:
+  - demo.example.com
+  resources:
+  - demojobs
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - demo.example.com
+  resources:
+  - demojobs/status
+  verbs:
+  - get

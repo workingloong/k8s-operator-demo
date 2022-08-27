@@ -1,0 +1,6 @@
+apiVersion: demo.example.com/v1
+kind: DemoJob
+metadata:
+  name: demojob-sample
+spec:
+  # TODO(user): Add fields here

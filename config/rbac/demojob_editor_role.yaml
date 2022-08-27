@@ -1,0 +1,24 @@
+# permissions for end users to edit demojobs.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: demojob-editor-role
+rules:
+- apiGroups:
+  - demo.example.com
+  resources:
+  - demojobs
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - demo.example.com
+  resources:
+  - demojobs/status
+  verbs:
+  - get
