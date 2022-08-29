@@ -17,29 +17,61 @@ limitations under the License.
 package v1
 
 import (
+	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
 // EDIT THIS FILE!  THIS IS SCAFFOLDING FOR YOU TO OWN!
 // NOTE: json tags are required.  Any new fields you add must have json tags for the fields to be serialized.
 
+const (
+	// JobCreated mean the jobs has been accepted by the cluster,
+	// but one or more of pods has not been started.
+	JobCreated string = "Created"
+
+	// JobRunning means all Pods of the jos have been successfully
+	// scheduled and launched
+	JobRunning string = "Running"
+
+	// JobSucceed means all Pods of the Job is terminated. The training
+	// completes without error
+	JobSucceeded string = "Succeed"
+
+	//JobFailed means the training has failed
+	JobFailed string = "Failed"
+)
+
 // DemoJobSpec defines the desired state of DemoJob
-type DemoJobSpec struct { 
+type DemoJobSpec struct {
 	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
 
-	// Foo is an example field of DemoJob. Edit demojob_types.go to remove/update
-	Foo string `json:"foo,omitempty"`
+	Command string                    `json:"command,omitempty"`
+	Image   string                    `json:"image,omitempty"`
+	Envs    map[string]*corev1.EnvVar `json:"envs,omitempty"`
+	Worker  *ReplicaSpec              `json:"worker,omitempty"`
 }
 
 // DemoJobStatus defines the observed state of DemoJob
 type DemoJobStatus struct {
 	// INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
+
+	Phase string `json:"phase,omitempty"`
 }
 
 type ReplicaSpec struct {
-	
+	// Count is the desired number of replicas
+	Count int32 `json:"count,omitempty"`
+	// Resource is the resource of each replica
+	Resource *ResourceSpec `json:"resource,omitempty"`
+}
+
+type ResourceSpec struct {
+	// CPU is CPU cores of a replica
+	CPU int32 `json:"cpu,omitempty"`
+	// Memory is the memory with MB of a replica
+	Memory int32 `json:"memory,omitempty"`
 }
 
 //+kubebuilder:object:root=true
